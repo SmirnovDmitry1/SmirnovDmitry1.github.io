@@ -113,7 +113,7 @@ function recording(value, name, up = false) {
 }
 
 function recordingImage (event, name) {
-    const img = document.querySelector(`.${name}`)
+    const img = document.querySelector(`#${name}`)
     img.style.backgroundImage = `url('${URL.createObjectURL(event.target.files[0])}')`
 }
 
