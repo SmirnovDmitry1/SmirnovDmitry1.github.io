@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    flex-grow: 1;
+    width: 100%;
+    background: #2251b2;
+    border-bottom: 3px solid #16336e;
+    height: 250px;
+}
+
+p {
+    margin: 0;
+}
+
+.row {
+    width: 95%;
+}
+
+.avatar {   
+    width: 200px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.image {
+    margin-left: 70px;
+    margin-right: 28px;
+}
+
+.who {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.name, .surname {
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: -25px;
+}
