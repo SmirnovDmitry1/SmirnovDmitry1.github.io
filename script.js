@@ -2,10 +2,11 @@ const cmd = document.querySelector('#cmd')
 const technologies = document.querySelector('#technologies')
 const progLanguages = document.querySelector('.progLanguages')
 const select = document.querySelector('select')
-const img = document.querySelector('.avatar')
+const img = document.querySelector('#avatar')
 const btnWorkExperience = document.querySelector('#addWorkExperience')
 const removeBtnWorkExperience = document.querySelector('#removeWorkExperience')
 const label = document.querySelector('label')
+const pre = document.querySelector('pre')
 const arrayData = [] 
 const style = display()
 
@@ -38,6 +39,7 @@ function display() {
             select.style.display = 'block'
             btnWorkExperience.style.display = 'inline-block'
             img.style.display = 'none'
+            pre.style.display = 'none'
             
 
             cmd.setAttribute('disabled', 'disabled')
@@ -53,6 +55,7 @@ function display() {
             select.style.display = 'none'
             btnWorkExperience.style.display = 'none'
             img.style.display = 'block'
+            pre.style.display = 'block'
 
             arrayData.forEach((data, key) => {
                 const block = document.querySelector(`.${data.name}`) 
@@ -87,6 +90,7 @@ const getInput = () => {
 }
 
 function recording(value, name, up = false) {
+    console.log(value)
     let element = false
     let key = null
     arrayData.forEach((data, i) => {
@@ -105,6 +109,7 @@ function recording(value, name, up = false) {
         }
         arrayData.push(data)
     }
+    console.log(arrayData)
 }
 
 function recordingImage (event, name) {
@@ -115,10 +120,10 @@ function recordingImage (event, name) {
 function technology(counter) {
     progLanguages.innerHTML = ''
     for (let i = 0; i < counter; i++) {
-        value = chekName(counter, `key${i}`)
+        value = chekName(counter, `li${i}`)
         progLanguages.innerHTML += `
-        <input type="text" onchange="recording(this.value, 'key${i}', true)" style="display: block" value="${value}">
-        <li class="key${i}" style="display: none">test</li>
+        <input id="li${i}" type="text" onchange="recording(this.value, 'li${i}', true)" style="display: block" value="${value}">
+        <li class="li${i}" style="display: none">test</li>
         `
     }
 }
@@ -160,16 +165,16 @@ const addWorkExperience = (remove) => {
                     <p style="display: none" class="heading whoWorked${i}">FRONT-END DEVELOPER</p>
                     <p style="display: none" class="heading nameProject${i}">GUEST NOW</p>
                     <p style="display: none" class="heading whenWorked${i}">2015-2018</p>
-                    <input value="${valueWhoWorked}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'whoWorked${i}', true)" placeholder="who worked">
-                    <input value="${valueNameProject}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'nameProject${i}', true)" placeholder="name project">
-                    <input value="${valueWhenWorked}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'whenWorked${i}', true)" placeholder="when worked">
+                    <input id="whoWorked${i}" value="${valueWhoWorked}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'whoWorked${i}', true)" placeholder="who worked">
+                    <input id="nameProject${i}" value="${valueNameProject}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'nameProject${i}', true)" placeholder="name project">
+                    <input id="whenWorked${i}" value="${valueWhenWorked}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'whenWorked${i}', true)" placeholder="when worked">
                 </h6>
                 <p style="display: none" class="experience${i}">Creatio At Guest now you can purchase tickets to existing events,
                 create your own, invite more people by e mail or sharing links, manage
                 date and place of the event.
                 Responsibilities: creating platform from scratch; support
                 Tools & Technologies: HTML, React.js, Bootstrap</p>
-                <textarea style="display: block;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')">${valueExperience}</textarea>
+                <textarea id="experience${i}" style="display: block;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')">${valueExperience}</textarea>
             </div>
         `
         }
@@ -178,3 +183,10 @@ const addWorkExperience = (remove) => {
 for (let i = 0; i < 13; i++) {
     technologies.innerHTML += `<option value="${i + 1}">${i + 1}</option>`
 }
+
+// function loadProfile(email) {
+//     const profile = {}
+//     profile.name = email
+//     profile.information = arrayData
+
+// }

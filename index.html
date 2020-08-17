@@ -22,7 +22,7 @@
           <header>
             <div class="row">
               <div class="image">
-                <div class="avatar" style="background-image: url('./img/avatar.jpeg');"></div>
+                <div id="avatar" style="background-image: url('./img/avatar.jpeg');"></div>
                 <label for="file-upload" class="custom-file-upload">
                   load image
                 </label>
@@ -33,9 +33,9 @@
                 <p class="who">JAVASCRIPT EXPERT</p>
                 <p class="name">VOLAN</p>
                 <p class="surname">DEMORT</p>
-                <input type="text" onchange="recording(this.value, 'who', true)" placeholder="JAVASCRIPT EXPERT">
-                <input type="text" onchange="recording(this.value, 'name', true)" placeholder="name">
-                <input type="text" onchange="recording(this.value, 'surname', true)" placeholder="surname">
+                <input id="specialty" type="text" onchange="recording(this.value, 'who', true)" placeholder="JAVASCRIPT EXPERT">
+                <input id="name" type="text" onchange="recording(this.value, 'name', true)" placeholder="name">
+                <input id="surname" type="text" onchange="recording(this.value, 'surname', true)" placeholder="surname">
               </div>  
             </div>
           </header>
@@ -44,28 +44,8 @@
               <div class="profile">
                 <div>
                   <h5>PERSONAL PROFILE</h5>
-                  <p class="person_profile">
-                    Full-Stack Expert with high-quality
-                    coding skills and excellent English.
-                    Moreover, have experience with
-                    Agile and Scrum methodologies. 
-                    Full-Stack Expert with high-quality
-                    coding skills and excellent English.
-                    Moreover, have experience with
-                    Agile and Scrum methodologies. 
-                    Full-Stack Expert with high-quality
-                    coding skills and excellent English.
-                    Moreover, have experience with
-                    Agile and Scrum methodologies. 
-                    Full-Stack Expert with high-quality
-                    coding skills and excellent English.
-                    Moreover, have experience with
-                    Agile and Scrum methodologies. 
-                    Full-Stack Expert with high-quality
-                    coding skills and excellent English.
-                    Moreover, have experience with
-                    Agile and Scrum methodologies.</p>
-                    <textarea cols="30" rows="15" onchange="recording(this.value, 'person_profile')" maxlength="700"></textarea>
+                  <pre class="person_profile">test</pre>
+                    <textarea id="personProfile" cols="30" rows="15" onchange="recording(this.value, 'person_profile')" maxlength="700"></textarea>
                     <!-- <input type="text" onchange="recording(this.value, 'person_profile')" placeholder="PERSONAL PROFILE"> -->
                 </div>
                 <div>
@@ -84,9 +64,9 @@
               <div class="information">
                 <div>
                   <h5>GET IN CONTACT</h5>
-                  <input type="text" onchange="recording(this.value, 'email')" placeholder="email">
-                  <input type="text" onchange="recording(this.value, 'skype')" placeholder="skype">
-                  <input type="text" onchange="recording(this.value, 'address')" placeholder="address">
+                  <input id="email" type="text" onchange="recording(this.value, 'email')" placeholder="email">
+                  <input id="skype" type="text" onchange="recording(this.value, 'skype')" placeholder="skype">
+                  <input id="address" type="text" onchange="recording(this.value, 'address')" placeholder="address">
                   <p class="email">E-mail: arlagun.et@gmail.com</p>
                   <p class="skype">Skype: artem.exceed</p> <br>
                   <p class="address">88 Grecheskaia Street, Taganrog, Rostov region, Russia 347900</p>
@@ -98,16 +78,16 @@
                       <p class="heading whoWorked0">FRONT-END DEVELOPER</p>
                       <p class="heading nameProject0">GUEST NOW</p>
                       <p class="heading whenWorked0">2015-2018</p>
-                      <input class="custom-input" type="text" onchange="recording(this.value, 'whoWorked0', true)" placeholder="who worked">
-                      <input class="custom-input" type="text" onchange="recording(this.value, 'nameProject0', true)" placeholder="name project">
-                      <input class="custom-input" type="text" onchange="recording(this.value, 'whenWorked0', true)" placeholder="when worked">
+                      <input id="whoWorked0" class="custom-input" type="text" onchange="recording(this.value, 'whoWorked0', true)" placeholder="who worked">
+                      <input id="nameProject0" class="custom-input" type="text" onchange="recording(this.value, 'nameProject0', true)" placeholder="name project">
+                      <input id="whenWorked0" class="custom-input" type="text" onchange="recording(this.value, 'whenWorked0', true)" placeholder="when worked">
                     </h6>
                     <p class="experience0">Creatio At Guest now you can purchase tickets to existing events,
                       create your own, invite more people by e mail or sharing links, manage
                       date and place of the event.
                       Responsibilities: creating platform from scratch; support
                       Tools & Technologies: HTML, React.js, Bootstrap</p>
-                      <textarea cols="55" rows="4" onchange="recording(this.value, 'experience0')" maxlength="305"></textarea>
+                      <textarea id="experience0" cols="55" rows="4" onchange="recording(this.value, 'experience0')" maxlength="305"></textarea>
                       <!-- <input type="text" onchange="recording(this.value, 'experience')" placeholder="Work experience"> -->
                   </div>
                 </div>
