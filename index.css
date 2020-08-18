@@ -147,6 +147,16 @@ select {
     width: 210mm;
 }
 
+pre {
+    display: block;
+    width: 287px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 16px;
+    font-family: sans-serif;
+}
+
 
 
 

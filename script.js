@@ -8,6 +8,7 @@ const removeBtnWorkExperience = document.querySelector('#removeWorkExperience')
 const label = document.querySelector('label')
 const pre = document.querySelector('pre')
 const arrayData = [] 
+const profiles = []
 const style = display()
 
 
@@ -184,9 +185,14 @@ for (let i = 0; i < 13; i++) {
     technologies.innerHTML += `<option value="${i + 1}">${i + 1}</option>`
 }
 
-// function loadProfile(email) {
-//     const profile = {}
-//     profile.name = email
-//     profile.information = arrayData
 
+
+// function loadProfile() {
+//     const specialty = document.querySelector('#specialty')
+//     const name = document.querySelector('#name')
+//     const surname = document.querySelector('#surname')
+//     const profile = {}
+//     profile.name = `${specialty.value} ${name.value} ${surname.value}`
+//     profile.information = arrayData
+//     profiles.push(profile)
 // }
