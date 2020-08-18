@@ -78,7 +78,8 @@ h6 {
 }
 
 .achievements h6 {
-    padding: 10px 0;
+    margin: 5px 0;
+    height: 25px;
 }
 
 input, textarea {
@@ -89,13 +90,19 @@ input, textarea {
 
 
 .heading {
+    display: block;
     float: left;
-    margin-left: 55px;
+    width: 100px;
+    text-align: right;
+    margin-left: 10px;
 }
 
 .heading:first-child {
+    width: 160px;
     margin: 0;
+    text-align: left;
 }
+
 
 .experience {
     font-size: .8em;

@@ -190,7 +190,7 @@ const addWorkExperience = (remove) => {
                 date and place of the event.
                 Responsibilities: creating platform from scratch; support
                 Tools & Technologies: HTML, React.js, Bootstrap</p>
-                <textarea id="experience${i}" style="display: block;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')">${valueExperience}</textarea>
+                <textarea id="experience${i}" style="display: block;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')" maxlength="305">${valueExperience}</textarea>
             </div>
         `
         }
@@ -248,7 +248,7 @@ function downloadUser(key) {
                             date and place of the event.
                             Responsibilities: creating platform from scratch; support
                             Tools & Technologies: HTML, React.js, Bootstrap</p>
-                            <textarea id="experience${i}" style="display: none;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')"></textarea>
+                            <textarea id="experience${i}" style="display: none;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')" maxlength="305"></textarea>
                         </div>
                     `
                 }
