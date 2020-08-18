@@ -1,16 +1,15 @@
 const cmd = document.querySelector('#cmd')
-const technologies = document.querySelector('#technologies')
 const progLanguages = document.querySelector('.progLanguages')
-const select = document.querySelector('select')
-const img = document.querySelector('#avatar')
+const select = document.querySelector('#technologies')
+const img = document.querySelector('.avatar')
 const btnWorkExperience = document.querySelector('#addWorkExperience')
 const removeBtnWorkExperience = document.querySelector('#removeWorkExperience')
 const label = document.querySelector('label')
 const pre = document.querySelector('pre')
-const arrayData = [] 
-const profiles = []
+const arrayData = []
 const style = display()
-
+const users = document.querySelector('#users')
+const btnSave = document.querySelector('#save')
 
 
 const cycle = (block, display) => {
@@ -19,7 +18,12 @@ const cycle = (block, display) => {
             name[i].style.display = display
     }
 }
-
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
 function display() {
     return {
         block() {
@@ -42,7 +46,7 @@ function display() {
             img.style.display = 'none'
             pre.style.display = 'none'
             
-
+            btnSave.setAttribute('disabled', 'disabled')
             cmd.setAttribute('disabled', 'disabled')
         },
         none() {
@@ -59,20 +63,24 @@ function display() {
             pre.style.display = 'block'
 
             arrayData.forEach((data, key) => {
-                const block = document.querySelector(`.${data.name}`) 
-                if (block === null) {
-                    arrayData.splice(key, 1)
-                } else {
-                    if (data.up) {
-                        block.innerHTML = data.value.toUpperCase()
-                    } else if (data.name === 'email' || data.name === 'skype') {
-                        block.innerHTML = `${data.name}: ${data.value}`
+                if (data.name !== 'avatar') {
+                    const block = document.querySelector(`.${data.name}`) 
+                    if (block === null) {
+                        arrayData.splice(key, 1)
                     } else {
-                        block.innerHTML = data.value
+                        if (data.up) {
+                            block.innerHTML = data.value.toUpperCase()
+                        } else if (data.name === 'email' || data.name === 'skype') {
+                            block.innerHTML = `${data.name}: ${data.value}`
+                        } else {
+                            block.innerHTML = data.value
+                        }
                     }
                 }
+                
             } )
 
+            btnSave.removeAttribute('disabled')
             cmd.removeAttribute('disabled')
         }
     }
@@ -109,12 +117,20 @@ function recording(value, name, up = false) {
         }
         arrayData.push(data)
     }
-    console.log(arrayData)
+    
 }
 
-function recordingImage (event, name) {
-    const img = document.querySelector(`#${name}`)
-    img.style.backgroundImage = `url('${URL.createObjectURL(event.target.files[0])}')`
+async function recordingImage (event, name) {
+    const img = document.querySelector(`.${name}`)
+    url = await toBase64(event.target.files[0])
+    img.style.backgroundImage = `url('${url}')`
+    
+    
+    const data = {
+        value: url,
+        name: name,
+    }
+    arrayData.push(data)
 }
 
 function technology(counter) {
@@ -141,24 +157,24 @@ const chekName = (key, name) => {
     return ''
 } 
 
-let key = 1
+let counter = 1
 
 const addWorkExperience = (remove) => {
     const achievements = document.querySelector('.achievements') 
 
     if (remove) {
-        key !== 0 ? key -= 1 : null
+        counter !== 0 ? counter -= 1 : null
     } else {
-        key < 5 ? key += 1 : null
+        counter < 5 ? counter += 1 : null
     }
     
     
         achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
-        for (let i = 0; i < key; i++) {
-            const valueExperience = chekName(key, `experience${i}`)
-            const valueWhoWorked = chekName(key, `whoWorked${i}`)
-            const valueNameProject = chekName(key, `nameProject${i}`)
-            const valueWhenWorked = chekName(key, `whenWorked${i}`)
+        for (let i = 0; i < counter; i++) {
+            const valueExperience = chekName(counter, `experience${i}`)
+            const valueWhoWorked = chekName(counter, `whoWorked${i}`)
+            const valueNameProject = chekName(counter, `nameProject${i}`)
+            const valueWhenWorked = chekName(counter, `whenWorked${i}`)
             achievements.innerHTML += `
             <div class="workExperience">
                 <h6>
@@ -181,27 +197,90 @@ const addWorkExperience = (remove) => {
 }
 
 for (let i = 0; i < 13; i++) {
-    technologies.innerHTML += `<option value="${i + 1}">${i + 1}</option>`
+    select.innerHTML += `<option value="${i + 1}">${i + 1}</option>`
 }
 
 
 
-// function loadProfile() {
-//     const specialty = document.querySelector('#specialty')
-//     const name = document.querySelector('#name')
-//     const surname = document.querySelector('#surname')
-//     const profile = {}
-//     profile.name = `${specialty.value} ${name.value} ${surname.value}`
-//     profile.information = arrayData
-//     profiles.push(profile)
+function saveProfile() {
+    const specialty = document.querySelector('#specialty')
+    const name = document.querySelector('#name')
+    const surname = document.querySelector('#surname')
+    const user = `${specialty.value} ${name.value} ${surname.value}`
+
+    localStorage.setItem(user, JSON.stringify(arrayData)) 
+}
+
+for(let i=0; i<localStorage.length; i++) {
+    let key = localStorage.key(i);
+    users.innerHTML += `<option value="${key}">${key}</option>`
+}
 
 
-//     const xhr = new XMLHttpRequest();
-//     const userJson = JSON.stringify(profiles)
+function downloadUser(key) {
+    const achievements = document.querySelector('.achievements')
+    const userJson = localStorage.getItem(key)
+    const arrayData = JSON.parse(userJson)
+    progLanguages.innerHTML = ''
+    achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
+    arrayData.forEach((data) => {
+        if (data.name === 'avatar') {
+            const img = document.querySelector(`.${data.name}`)
+            img.style.backgroundImage = `url('${data.value}')`
+        } else {
+            for (let i = 0; i < 5; i++) {
+            
+                if (data.name === `whoWorked${i}`) {
+                    achievements.innerHTML += `
+                        <div class="workExperience">
+                            <h6>
+                                <p class="heading whoWorked${i}"></p>
+                                <p class="heading nameProject${i}"></p>
+                                <p class="heading whenWorked${i}"></p>
+                                <input id="whoWorked${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'whoWorked${i}', true)" placeholder="who worked">
+                                <input id="nameProject${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'nameProject${i}', true)" placeholder="name project">
+                                <input id="whenWorked${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'whenWorked${i}', true)" placeholder="when worked">
+                            </h6>
+                            <p class="experience${i}">Creatio At Guest now you can purchase tickets to existing events,
+                            create your own, invite more people by e mail or sharing links, manage
+                            date and place of the event.
+                            Responsibilities: creating platform from scratch; support
+                            Tools & Technologies: HTML, React.js, Bootstrap</p>
+                            <textarea id="experience${i}" style="display: none;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')"></textarea>
+                        </div>
+                    `
+                }
+            }
+            const block = document.querySelector(`.${data.name}`)
+            const input = document.querySelector(`#${data.name}`)
+            if (block === null) {
+                null
+            } else {
+                if (data.up) {
+                    block.innerHTML = data.value.toUpperCase()
+                } else if (data.name === 'email' || data.name === 'skype') {
+                    block.innerHTML = `${data.name}: ${data.value}`
+                } else {
+                    block.innerHTML = data.value
+                }
+                if (input.tagName === 'TEXTAREA') {
+                    input.textContent = data.value
+                } else {
+                    input.setAttribute('value', data.value)
+                }
+            }
+            for (let i = 0; i < 13; i++) {
+                if (data.name === `li${i}`) {
+                    progLanguages.innerHTML += `
+                <input id="li${i}" type="text" onchange="recording(this.value, 'li${i}', true)" style="display: none" value="${data.value}">
+                <li class="li${i}">${data.value}</li>
+                `
+                }
+            }
+        }
+        
+    } )
 
-//     xhr.open("POST", 'https://smirnovdmitry1.github.io/json/user-data.json');
-//     xhr.setRequestHeader('Content-Type', 'application/json');
-
-
-//     xhr.send(userJson);
-// }
+    
+    
+}

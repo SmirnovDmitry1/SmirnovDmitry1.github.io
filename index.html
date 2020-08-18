@@ -15,19 +15,20 @@
     <div class="row">
       <div class="col-md-3">
         <button type="button" class="btn btn-success" id="cmd">Скачать PDF</button>
-        <button type="button" class="btn btn-primary" id="change" onclick="getInput()">Изменить/Сохранить</button>
-        <!-- <button type="button" class="btn btn-primary" id="load" onclick="loadProfile()">loadProfile</button> -->
+        <button type="button" class="btn btn-primary" id="change" onclick="getInput()">Изменить</button>
+        <button type="button" class="btn btn-primary" id="save" onclick="saveProfile()" disabled>Сохранить</button>
+        <select name="users" id="users" onclick="downloadUser(this.value)"></select>
       </div>
       <div class="col-md-9">
         <div id="pdf_cv">
           <header>
             <div class="row">
               <div class="image">
-                <div id="avatar" style="background-image: url('./img/avatar.jpeg');"></div>
-                <label for="file-upload" class="custom-file-upload">
+                <div class="avatar" style="background-image: url('./img/avatar.jpeg');"></div>
+                <label for="avatar" class="custom-file-upload">
                   load image
                 </label>
-                <input id="file-upload" type="file" accept="image/*" onchange="recordingImage(event, 'avatar')">
+                <input id="avatar" type="file" accept="image/*" onchange="recordingImage(event, 'avatar')">
                 
               </div>
               <div class="naming">
@@ -46,7 +47,7 @@
                 <div>
                   <h5>PERSONAL PROFILE</h5>
                   <pre class="person_profile">test</pre>
-                    <textarea id="personProfile" cols="30" rows="15" onchange="recording(this.value, 'person_profile')" maxlength="700"></textarea>
+                    <textarea id="person_profile" cols="30" rows="15" onchange="recording(this.value, 'person_profile')" maxlength="700"></textarea>
                     <!-- <input type="text" onchange="recording(this.value, 'person_profile')" placeholder="PERSONAL PROFILE"> -->
                 </div>
                 <div>

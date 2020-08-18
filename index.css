@@ -81,11 +81,12 @@ h6 {
     padding: 10px 0;
 }
 
-input, select, textarea {
+input, textarea {
     display: none;
     resize: none;
-
 }
+
+
 
 .heading {
     float: left;
@@ -137,9 +138,10 @@ textarea, input, select {
     margin: 0;
 }
 
-select {
+#technologies {
     width: 230px;
     height: 30px;
+    display: none;
 }
 
 #pdf_cv {
@@ -155,6 +157,15 @@ pre {
     font-style: normal;
     line-height: 16px;
     font-family: sans-serif;
+}
+
+button {
+    margin-top: 15px;
+}
+
+#users {
+    width: 200px;
+    height: 30px;
 }
 
 
