@@ -6,7 +6,7 @@ const btnWorkExperience = document.querySelector('#addWorkExperience')
 const removeBtnWorkExperience = document.querySelector('#removeWorkExperience')
 const label = document.querySelector('label')
 const pre = document.querySelector('pre')
-const arrayData = []
+let arrayData = []
 const style = display()
 const users = document.querySelector('#users')
 const btnSave = document.querySelector('#save')
@@ -220,7 +220,8 @@ for(let i=0; i<localStorage.length; i++) {
 function downloadUser(key) {
     const achievements = document.querySelector('.achievements')
     const userJson = localStorage.getItem(key)
-    const arrayData = JSON.parse(userJson)
+    arrayData = JSON.parse(userJson)
+    console.log(arrayData)
     progLanguages.innerHTML = ''
     achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
     arrayData.forEach((data) => {
@@ -231,6 +232,7 @@ function downloadUser(key) {
             for (let i = 0; i < 5; i++) {
             
                 if (data.name === `whoWorked${i}`) {
+                    counter = i + 1
                     achievements.innerHTML += `
                         <div class="workExperience">
                             <h6>
