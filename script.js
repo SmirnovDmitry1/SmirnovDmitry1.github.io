@@ -91,7 +91,6 @@ const getInput = () => {
 }
 
 function recording(value, name, up = false) {
-    console.log(value)
     let element = false
     let key = null
     arrayData.forEach((data, i) => {
@@ -187,12 +186,22 @@ for (let i = 0; i < 13; i++) {
 
 
 
-// function loadProfile() {
-//     const specialty = document.querySelector('#specialty')
-//     const name = document.querySelector('#name')
-//     const surname = document.querySelector('#surname')
-//     const profile = {}
-//     profile.name = `${specialty.value} ${name.value} ${surname.value}`
-//     profile.information = arrayData
-//     profiles.push(profile)
-// }
+function loadProfile() {
+    const specialty = document.querySelector('#specialty')
+    const name = document.querySelector('#name')
+    const surname = document.querySelector('#surname')
+    const profile = {}
+    profile.name = `${specialty.value} ${name.value} ${surname.value}`
+    profile.information = arrayData
+    profiles.push(profile)
+
+
+    const xhr = new XMLHttpRequest();
+    const userJson = JSON.stringify(profiles)
+
+    xhr.open("POST", 'https://smirnovdmitry1.github.io/json/user-data.json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+
+    xhr.send(userJson);
+}
