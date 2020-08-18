@@ -221,7 +221,6 @@ function downloadUser(key) {
     const achievements = document.querySelector('.achievements')
     const userJson = localStorage.getItem(key)
     arrayData = JSON.parse(userJson)
-    console.log(arrayData)
     progLanguages.innerHTML = ''
     achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
     arrayData.forEach((data) => {
