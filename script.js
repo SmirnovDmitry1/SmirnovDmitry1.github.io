@@ -45,7 +45,6 @@ function display() {
             btnWorkExperience.style.display = 'inline-block'
             img.style.display = 'none'
             pre.style.display = 'none'
-            
             btnSave.setAttribute('disabled', 'disabled')
             cmd.setAttribute('disabled', 'disabled')
         },
@@ -79,7 +78,6 @@ function display() {
                 }
                 
             } )
-
             btnSave.removeAttribute('disabled')
             cmd.removeAttribute('disabled')
         }
@@ -124,8 +122,6 @@ async function recordingImage (event, name) {
     const img = document.querySelector(`.${name}`)
     url = await toBase64(event.target.files[0])
     img.style.backgroundImage = `url('${url}')`
-    
-    
     const data = {
         value: url,
         name: name,
@@ -207,16 +203,12 @@ function saveProfile() {
     const name = document.querySelector('#name')
     const surname = document.querySelector('#surname')
     const user = `${specialty.value} ${name.value} ${surname.value}`
-
     localStorage.setItem(user, JSON.stringify(arrayData)) 
 }
-
 for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
     users.innerHTML += `<option value="${key}">${key}</option>`
 }
-
-
 function downloadUser(key) {
     const achievements = document.querySelector('.achievements')
     const userJson = localStorage.getItem(key)
@@ -242,11 +234,7 @@ function downloadUser(key) {
                                 <input id="nameProject${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'nameProject${i}', true)" placeholder="name project">
                                 <input id="whenWorked${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'whenWorked${i}', true)" placeholder="when worked">
                             </h6>
-                            <p class="experience${i}">Creatio At Guest now you can purchase tickets to existing events,
-                            create your own, invite more people by e mail or sharing links, manage
-                            date and place of the event.
-                            Responsibilities: creating platform from scratch; support
-                            Tools & Technologies: HTML, React.js, Bootstrap</p>
+                            <p class="experience${i}"></p>
                             <textarea id="experience${i}" style="display: none;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')" maxlength="305"></textarea>
                         </div>
                     `
@@ -279,9 +267,5 @@ function downloadUser(key) {
                 }
             }
         }
-        
-    } )
-
-    
-    
+    })
 }
