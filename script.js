@@ -6,10 +6,15 @@ const btnWorkExperience = document.querySelector('#addWorkExperience')
 const removeBtnWorkExperience = document.querySelector('#removeWorkExperience')
 const label = document.querySelector('label')
 const pre = document.querySelector('pre')
-let arrayData = []
+const profiles = {}
 const style = display()
 const users = document.querySelector('#users')
 const btnSave = document.querySelector('#save')
+let arrayData = []
+let editUser = {
+    id: null,
+    edit: false
+}
 
 
 const cycle = (block, display) => {
@@ -120,8 +125,12 @@ function recording(value, name, up = false) {
 
 async function recordingImage (event, name) {
     const img = document.querySelector(`.${name}`)
+    const label = document.querySelector(`.custom-file-upload`)
     url = await toBase64(event.target.files[0])
     img.style.backgroundImage = `url('${url}')`
+    label.style.color = '#40b61c'
+    label.style.fontWeight = 'bold'
+    label.textContent = 'success'
     const data = {
         value: url,
         name: name,
@@ -198,25 +207,76 @@ for (let i = 0; i < 13; i++) {
 
 
 
-function saveProfile() {
+async function saveProfile() {
     const specialty = document.querySelector('#specialty')
     const name = document.querySelector('#name')
     const surname = document.querySelector('#surname')
     const user = `${specialty.value} ${name.value} ${surname.value}`
-    localStorage.setItem(user, JSON.stringify(arrayData)) 
-    for(let i=0; i<localStorage.length; i++) {
-        let key = localStorage.key(i);
-        users.innerHTML += `<option value="${key}">${key}</option>`
+    profiles.nameUser = user
+    profiles.dataUser = JSON.stringify(arrayData)
+    
+    if (editUser.edit) {
+        url = `https://blanks-8e16e.firebaseio.com/profiles/${editUser.id}.json`
+        method = 'PUT'
+    } else {
+        url = `https://blanks-8e16e.firebaseio.com/profiles.json`
+        method = 'POST'
     }
+
+    await fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(profiles)
+        });
+
+    arrayData = []
+    editUser = {
+        id: null,
+        edit: false
+    }
+    test()
 }
-for(let i=0; i<localStorage.length; i++) {
-    let key = localStorage.key(i);
-    users.innerHTML += `<option value="${key}">${key}</option>`
+
+
+
+async function test() {
+    let url = 'https://blanks-8e16e.firebaseio.com/profiles.json?print=pretty';
+    let response = await fetch(url);
+    
+    let answer = await response.json();
+    
+    const profiles = []
+
+    
+    Object.keys(answer).forEach( async (key, index) => {
+        profiles.push(
+            
+            {
+            id: key,
+            name: answer[key].nameUser
+        })
+    })
+    users.innerHTML = ''
+    profiles.forEach((user) => {
+        users.innerHTML += `<option value="${user.id}">${user.name}</option>`
+    })
 }
-function downloadUser(key) {
+
+
+
+
+async function downloadUser(key) {
+    editUser.id = key
+    editUser.edit = true
     const achievements = document.querySelector('.achievements')
-    const userJson = localStorage.getItem(key)
-    arrayData = JSON.parse(userJson)
+    let url = `https://blanks-8e16e.firebaseio.com/profiles/${key}.json`
+    let response = await fetch(url);
+    
+    let user = await response.json();
+    arrayData = JSON.parse(user.dataUser)
+
     progLanguages.innerHTML = ''
     achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
     arrayData && arrayData.forEach((data) => {
@@ -273,3 +333,5 @@ function downloadUser(key) {
         }
     })
 }
+
+test()
