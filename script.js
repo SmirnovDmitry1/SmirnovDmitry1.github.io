@@ -61,7 +61,7 @@ function display() {
             img.style.display = 'block'
             pre.style.display = 'block'
 
-            arrayData.forEach((data, key) => {
+            arrayData && arrayData.forEach((data, key) => {
                 if (data.name !== 'avatar') {
                     const block = document.querySelector(`.${data.name}`) 
                     if (block === null) {
@@ -99,7 +99,7 @@ const getInput = () => {
 function recording(value, name, up = false) {
     let element = false
     let key = null
-    arrayData.forEach((data, i) => {
+    arrayData && arrayData.forEach((data, i) => {
         if (data.name === name ) {
             element = true
             key = i
@@ -204,6 +204,10 @@ function saveProfile() {
     const surname = document.querySelector('#surname')
     const user = `${specialty.value} ${name.value} ${surname.value}`
     localStorage.setItem(user, JSON.stringify(arrayData)) 
+    for(let i=0; i<localStorage.length; i++) {
+        let key = localStorage.key(i);
+        users.innerHTML += `<option value="${key}">${key}</option>`
+    }
 }
 for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
@@ -215,7 +219,7 @@ function downloadUser(key) {
     arrayData = JSON.parse(userJson)
     progLanguages.innerHTML = ''
     achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
-    arrayData.forEach((data) => {
+    arrayData && arrayData.forEach((data) => {
         if (data.name === 'avatar') {
             const img = document.querySelector(`.${data.name}`)
             img.style.backgroundImage = `url('${data.value}')`
