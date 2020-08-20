@@ -273,6 +273,10 @@ async function delet(key) {
     test()
     const delet = document.querySelector('#delete')
     delet.innerHTML = ``
+    editUser = {
+        id: null,
+        edit: false
+    }
 }
 
 
