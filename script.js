@@ -250,7 +250,7 @@ async function test() {
     const profiles = []
 
     
-    Object.keys(answer).forEach( async (key, index) => {
+    answer && Object.keys(answer).forEach( async (key, index) => {
         profiles.push(
             
             {
