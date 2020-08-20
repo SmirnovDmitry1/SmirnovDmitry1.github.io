@@ -258,25 +258,37 @@ async function test() {
             name: answer[key].nameUser
         })
     })
-    users.innerHTML = ''
+    users.innerHTML = '<h2>Список карточек</h2>'
     profiles.forEach((user) => {
-        users.innerHTML += `<option value="${user.id}">${user.name}</option>`
+        users.innerHTML += `<button onclick="downloadUser('${user.id}')" type="button" class="btn btn-outline-success">${user.name}</button>`
     })
 }
 
+async function delet(key) {
+    let url = `https://blanks-8e16e.firebaseio.com/profiles/${key}.json`
+    await fetch(url, {
+        method: 'DELETE',
+    });
+
+    test()
+    const delet = document.querySelector('#delete')
+    delet.innerHTML = ``
+}
 
 
 
 async function downloadUser(key) {
     editUser.id = key
     editUser.edit = true
+    const delet = document.querySelector('#delete')
+    delet.innerHTML = `<button onclick="delet('${key}')" type="button" class="btn btn-outline-danger">Удалить</button>`
     const achievements = document.querySelector('.achievements')
     let url = `https://blanks-8e16e.firebaseio.com/profiles/${key}.json`
     let response = await fetch(url);
-    
+    const img = document.querySelector(`.avatar`)
     let user = await response.json();
     arrayData = JSON.parse(user.dataUser)
-
+    img.style.backgroundImage = `url('./img/avatar.jpeg')`
     progLanguages.innerHTML = ''
     achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
     arrayData && arrayData.forEach((data) => {
