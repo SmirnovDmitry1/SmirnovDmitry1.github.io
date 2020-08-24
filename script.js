@@ -174,7 +174,7 @@ const addWorkExperience = (remove) => {
     }
     
     
-        achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
+        achievements.innerHTML = '<h5>PROJECTS</h5>'
         for (let i = 0; i < counter; i++) {
             const valueExperience = chekName(counter, `experience${i}`)
             const valueWhoWorked = chekName(counter, `whoWorked${i}`)
@@ -294,7 +294,7 @@ async function downloadUser(key) {
     arrayData = JSON.parse(user.dataUser)
     img.style.backgroundImage = `url('./img/avatar.jpeg')`
     progLanguages.innerHTML = ''
-    achievements.innerHTML = '<h5>WORK EXPERIENCE</h5>'
+    achievements.innerHTML = '<h5>PROJECTS</h5>'
     arrayData && arrayData.forEach((data) => {
         if (data.name === 'avatar') {
             const img = document.querySelector(`.${data.name}`)
