@@ -186,11 +186,11 @@ const addWorkExperience = (remove) => {
                     <input id="nameProject${i}" value="${valueNameProject}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'nameProject${i}', true)" placeholder="name project">
                     <input id="whenWorked${i}" value="${valueWhenWorked}" class="custom-input" style="display: inline-block" type="text" onchange="recording(this.value, 'whenWorked${i}', true)" placeholder="when worked">
                 </h6>
-                <p style="display: none" class="experience${i}">Creatio At Guest now you can purchase tickets to existing events,
+                <pre style="display: none" class="pre-class experience${i}">Creatio At Guest now you can purchase tickets to existing events,
                 create your own, invite more people by e mail or sharing links, manage
                 date and place of the event.
                 Responsibilities: creating platform from scratch; support
-                Tools & Technologies: HTML, React.js, Bootstrap</p>
+                Tools & Technologies: HTML, React.js, Bootstrap</pre>
                 <textarea id="experience${i}" style="display: block;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')" maxlength="305">${valueExperience}</textarea>
             </div>
         `;
@@ -285,7 +285,6 @@ async function downloadUser(key) {
   achievements.innerHTML = "<h5>PROJECTS</h5>";
   arrayData &&
     arrayData.forEach((data) => {
-      console.log("data", data);
       if (data.name === "avatar") {
         const img = document.querySelector(`.${data.name}`);
         img.style.backgroundImage = `url('${data.value}')`;
@@ -303,7 +302,7 @@ async function downloadUser(key) {
                                 <input id="nameProject${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'nameProject${i}', true)" placeholder="name project">
                                 <input id="whenWorked${i}" class="custom-input" style="display: none;" type="text" onchange="recording(this.value, 'whenWorked${i}', true)" placeholder="when worked">
                             </h6>
-                            <p class="experience${i}"></p>
+                            <pre class="pre-class experience${i}"></pre>
                             <textarea id="experience${i}" style="display: none;" cols="55" rows="4" onchange="recording(this.value, 'experience${i}')" maxlength="305"></textarea>
                         </div>
                     `;

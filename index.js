@@ -1,12 +1,9 @@
-var doc = new jsPDF();
-
 //JQuery
 $("#cmd").click(function () {
-  console.log("----------click");
   var opt = {
     margin: 1,
-    filename: "name.pdf",
-    image: { type: "png", quality: 1 }, 
+    filename: "ИЗМЕНИ_НАЗВАНИЕ_НА_ИМЯ_РАЗРАБА.pdf",
+    image: { type: "png", quality: 1 },
     html2canvas: { scale: 3 },
     jsPDF: {
       unit: "pt",
@@ -14,7 +11,6 @@ $("#cmd").click(function () {
       orientation: "portrait",
     },
   };
-  console.log('HEHEHHEHEHEHEHHEHE')
   var element = document.getElementById("pdf_cv");
   html2pdf().set(opt).from(element).save();
 });
